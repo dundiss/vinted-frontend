@@ -1,1 +1,132 @@
 /* Other rules */
+:root {
+  --appSideMargin: 120px;
+  --appGreenColor: #09aeb7;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-size: 34px;
+  line-height: 42.5px;
+}
+
+button {
+  border-radius: 5px;
+  border: 1px solid var(--appGreenColor);
+  color: var(--appGreenColor);
+  background-color: white;
+  height: 30px;
+}
+
+.container {
+  width: 1400px;
+  display: flex;
+  justify-content: center;
+  margin: 0 var(--appSideMargin);
+}
+
+header {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header img {
+  width: 100px;
+  object-fit: cover;
+  margin-right: 80px;
+}
+
+header > * {
+  flex: 1;
+}
+
+header > *:not(:first-child) {
+  margin-right: 20px;
+}
+
+header > input {
+  flex: 7;
+  border-radius: 5px;
+  height: 30px;
+  border: none;
+  background-color: #f5f6f7;
+}
+
+header > button:last-child {
+  color: white;
+  background-color: var(--appGreenColor);
+  margin-left: 40px;
+}
+
+.hero {
+  width: 100vw;
+  height: 400px;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero div {
+  position: absolute;
+  top: 100px;
+  left: var(--appSideMargin);
+  width: 350px;
+  height: 300px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 20px;
+  border-radius: 5px;
+}
+
+.hero button {
+  height: 40px;
+  border-radius: 5px;
+  background-color: var(--appGreenColor);
+  color: white;
+}
+
+.offers {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.offer {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  margin-right: 15px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.offer-header {
+  display: flex;
+  margin-bottom: 5px;
+}
+.offer-header span {
+  margin-left: 10px;
+}
+
+.offer-header img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.offer > img {
+  width: 225px;
+  height: 325px;
+  object-fit: cover;
+}
