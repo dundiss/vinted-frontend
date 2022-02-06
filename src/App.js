@@ -17,8 +17,8 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.get("https://vinted-pegasus21-dt.herokuapp.com/offers");
-        const response = await axios.get("https://lereacteur-vinted-api.herokuapp.com/offers");
+        const response = await axios.get("https://vinted-pegasus21-dt.herokuapp.com/offers");
+        //const response = await axios.get("https://lereacteur-vinted-api.herokuapp.com/offers");
         //console.log(response.data);
         setData(response.data);
         setIsLoading(false);
