@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Signup = ({ setIsConnected, show, setShow, setShowLogin }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
 
     const showHideClassName = show ? "modal display-block" : "modal display-none";
@@ -27,6 +28,11 @@ const Signup = ({ setIsConnected, show, setShow, setShowLogin }) => {
         setEmail(value);
     };
 
+    const handlePhoneChange = event => {
+        const value = event.target.value;
+        setPhone(value);
+    };
+
     const handlePasswordChange = event => {
         const value = event.target.value;
         setPassword(value);
@@ -42,15 +48,16 @@ const Signup = ({ setIsConnected, show, setShow, setShowLogin }) => {
         event.preventDefault(); // Pour empêcher le navigateur de changer de page lors de la soumission du formulaire
         //console.log(email, password);
         try {
-            const response = await axios.post("https://lereacteur-vinted-api.herokuapp.com/user/signup",
+            //const response = await axios.post("https://lereacteur-vinted-api.herokuapp.com/user/signup",
+            const response = await axios.post("https://vinted-pegasus21-dt.herokuapp.com/user/signup",
                 {
                     username: username,
                     email: email,
-                    phone: "0606060606",
+                    phone: phone,
                     password: password
                 });
             
-            if (response.data && response.data.token && response.data.token !== "") {
+            if (response.data && response.data.token && (response.data.token !== "")) {
                 Cookies.set("token", response.data.token);
                 setIsConnected(true);
                 handleOnClose();
@@ -87,6 +94,14 @@ const Signup = ({ setIsConnected, show, setShow, setShowLogin }) => {
                             name="email"
                             value={email}
                             onChange={handleEmailChange}
+                        />
+                        <input
+                            required
+                            placeholder="Phone"
+                            type="text"
+                            name="Phone"
+                            value={phone}
+                            onChange={handlePhoneChange}
                         />
                         <input
                             required
