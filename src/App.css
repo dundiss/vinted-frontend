@@ -63,6 +63,16 @@ header > button:last-child {
   margin-left: 40px;
 }
 
+.toDisconnect {
+  border-color: #c2175b;
+  background-color: #c2175b;
+  color: white;
+}
+
+.toConnect {
+  background-color: white;
+}
+
 /*Page Home*/
 .hero {
   width: 100vw;
@@ -217,6 +227,169 @@ header > button:last-child {
   margin-top: 50px;
 }
 
+/*SIGNUP*/
+/* Décrire l'animation */
+@keyframes slideDownFadeIN {
+  from {
+    top: -100px;
+    opacity: 0;
+  }
+  to {
+    top: 0px;
+    opacity: 1;
+  }
+}
+
+/* Foncer l'arrière-plan de la fenêtre modale */
+.modal {
+  /* display: none; */
+  /* display: flex; */
+  left: 0;
+  top: 0;
+  /* width: 100%; */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Afficher la fenêtre modale lorsqu'elle est ciblée par un lien supprimer */
+/* .modal:target {
+  display: table;
+  position: absolute;
+} */
+
+.display-block {
+  display: table;
+  position: absolute;
+  z-index: 1;
+}
+
+.display-none {
+  display: none;
+}
+
+/* la fenêtre modale  */
+.modal-dialog {
+  /* display: table-cell;
+  vertical-align: middle; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+/* Le contenu de la modale */
+.modal-dialog .modal-content {
+  margin: auto;
+  background-color: #f3f3f3;
+  position: relative;
+  padding: 0;
+  outline: 0;
+  border: 1px #777 solid;
+  text-align: justify;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  animation-name: slideDownFadeIN;
+  animation-duration: 0.5s;
+}
+
+/* Bouton servant à fermer la fenêtre modale */
+.closebtn {
+  text-decoration: none;
+  float: right;
+  font-size: 35px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.closebtn:hover,
+.closebtn:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* .container {
+  padding: 2px 16px;
+} */
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-content header {
+  margin-left: 0px;
+  width: 100%;
+  background-color: var(--appGreenColor);
+  font-size: 20px;
+  color: white;
+  /* padding-left: 30%; */
+  /* box-sizing: border-box; */
+  /* display: flex; */
+  /* justify-content: space-between; */
+}
+
+.modal-content header h2 {
+  padding-left: 10px;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.modal-content form > input {
+  width: 300px;
+  box-sizing: border-box;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.modal-content form > input:not(:last-child) {
+  border: none;
+  border-bottom: 1px solid tomato;
+  margin-bottom: 10px;
+}
+
+.modal-content form > input:last-child {
+  background-color: var(--appGreenColor);
+  color: white;
+  border-color: var(--appGreenColor);
+}
+
+.modal-content form .terms {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 10px 0;
+}
+
+.modal-content form .terms span {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.modal-content .already-signup {
+  text-decoration: none;
+  color: var(--appGreenColor);
+  text-align: center;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.modal-content form span {
+  color: #999999;
+}
+
 @media (max-width: 768px) {
   :root {
     --appSideMargin: 5px;
@@ -280,5 +453,34 @@ header > button:last-child {
   .container-offer .details {
     width: 100%;
     padding: 10px;
+  }
+
+  .modal {
+    width: 100vw;
+  }
+
+  .modal-content header {
+    margin-left: 0px;
+    padding-left: 0px;
+    justify-content: flex-end;
+  }
+
+  .modal-dialog {
+    width: 100vw;
+    margin-left: 0px;
+  }
+  .modal-content {
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .modal-content form {
+    width: 100%;
+  }
+
+  .modal-content form > input,
+  .modal-content form span {
+    width: 95%;
+    box-sizing: border-box;
   }
 }

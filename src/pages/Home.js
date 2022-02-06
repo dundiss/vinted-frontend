@@ -16,14 +16,14 @@ function Home({ offers, banner }) {
             <div className="container offers">
                 {
                     offers.map((offer, index) => {
-                        console.log(index + " " + offer.owner.account.avatar);
+                        //console.log(index + " " + offer.owner.account.avatar);
                         const details = {};
                         offer.product_details.forEach(element => {
                             const key = Object.keys(element);
                             details[key] = element[key]
                         });
 
-                        console.log(offer.product_details);
+                        //console.log(offer.product_details);
                         return (
                             <div key={index} className="offer">
                                 <div className="offer-header">
