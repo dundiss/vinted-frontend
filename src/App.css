@@ -57,7 +57,7 @@ header > input {
   background-color: #f5f6f7;
 }
 
-header > button:last-child {
+header .btn-vente {
   color: white;
   background-color: var(--appGreenColor);
   margin-left: 40px;
@@ -243,7 +243,6 @@ header > button:last-child {
 /* Foncer l'arrière-plan de la fenêtre modale */
 .modal {
   /* display: none; */
-  /* display: flex; */
   left: 0;
   top: 0;
   /* width: 100%; */
@@ -323,20 +322,23 @@ header > button:last-child {
   justify-content: center;
 }
 
-.modal-content header {
+.modal-content > header {
   margin-left: 0px;
   width: 100%;
   background-color: var(--appGreenColor);
   font-size: 20px;
   color: white;
-  /* padding-left: 30%; */
-  /* box-sizing: border-box; */
-  /* display: flex; */
-  /* justify-content: space-between; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 50px;
 }
 
 .modal-content header h2 {
   padding-left: 10px;
+  padding-top: 5px;
+  flex: 10;
 }
 
 .modal-content form {
@@ -390,6 +392,10 @@ header > button:last-child {
   color: #999999;
 }
 
+#newsletter:checked {
+  background-color: var(--appGreenColor);
+}
+
 @media (max-width: 768px) {
   :root {
     --appSideMargin: 5px;
@@ -412,8 +418,8 @@ header > button:last-child {
     margin-right: 5px;
   }
 
-  header > button:last-child {
-    margin-left: 5px;
+  header .btn-vente {
+    margin-left: 0px;
     display: none;
   }
 
@@ -462,7 +468,10 @@ header > button:last-child {
   .modal-content header {
     margin-left: 0px;
     padding-left: 0px;
-    justify-content: flex-end;
+  }
+
+  .modal-content header h2 {
+    flex: 7;
   }
 
   .modal-dialog {
@@ -475,6 +484,9 @@ header > button:last-child {
   }
 
   .modal-content form {
+    width: 100%;
+  }
+  .modal-content form .terms {
     width: 100%;
   }
 

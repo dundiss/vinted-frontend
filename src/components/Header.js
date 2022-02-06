@@ -50,7 +50,7 @@ function Header({ logo, isConnected, setIsConnected }) {
             <button onClick={handleOnClickLogin}
                 className={isConnected ? "toDisconnect" : "toConnect"}
             >{isConnected ? "Se déconnecter" : "Se connecter"}</button>
-            <button>Vends tes articles</button>
+            <button className="btn-vente">Vends tes articles</button>
             <Login setIsConnected={setIsConnected} show={showLogin} setShow={setShowLogin}></Login>
             <Signup setIsConnected={setIsConnected} show={showSignup} setShow={setShowSignup} setShowLogin={setShowLogin}></Signup>
         </header>
