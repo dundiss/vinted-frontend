@@ -3,20 +3,24 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import du package axios
 import axios from "axios";
 import { useState, useEffect } from "react";
+// import { Link } from "react-router-dom"
+import Cookies from "js-cookie";
 import Home from "./pages/Home";
 import Offer from "./pages/Offer";
 import logo from "./assets/images/logo-vinted.png";
 import banner from "./assets/images/banner-wide.jpg"
 import Header from "./components/Header";
+import Publish from "./pages/Publish";
 
 function App() {
   const [data, setData] = useState();
+  const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isConnected, setIsConnected] = useState(false);
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        //const response = await axios.get("http://localhost:3000/offers", { crossdomain: true });
         const response = await axios.get("https://vinted-pegasus21-dt.herokuapp.com/offers");
         //const response = await axios.get("https://lereacteur-vinted-api.herokuapp.com/offers");
         //console.log(response.data);
@@ -35,17 +39,21 @@ function App() {
     <div>
         
         <Router>
-          <Header logo={logo} isConnected={isConnected} setIsConnected={setIsConnected}></Header>
-          {/* <nav>
+          <Header logo={logo} setData={setData} userToken={userToken} setUserToken={setUserToken}></Header>
+          <nav>
             <ul>
-              <li>
+              {/* <li>
                 <Link to="/">Home</Link>
-              </li>
+              </li> */}
+              {/* <li>
+                <Link to="/publish">Publish</Link>
+              </li> */}
             </ul>
-          </nav> */}
+          </nav>
           <Routes>
-            <Route path="/" element={<Home offers={data.offers} banner={banner}/>} />
-            <Route path="/offer/:id" element={<Offer />} />
+            <Route path="/" element={<Home offers={data.offers} banner={banner} />} />
+            <Route path="/publish" element={<Publish />} />
+            <Route path="/offer/:id" element={<Offer userToken={userToken}/>} />
           </Routes>
         </Router>
     </div>

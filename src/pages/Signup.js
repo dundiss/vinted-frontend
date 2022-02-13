@@ -4,7 +4,7 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const Signup = ({ setIsConnected, show, setShow, setShowLogin }) => {
+const Signup = ({ setUserToken, show, setShow, setShowLogin }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -58,8 +58,8 @@ const Signup = ({ setIsConnected, show, setShow, setShowLogin }) => {
                 });
             
             if (response.data && response.data.token && (response.data.token !== "")) {
-                Cookies.set("token", response.data.token);
-                setIsConnected(true);
+                Cookies.set("userToken", response.data.token);
+                setUserToken(response.data.token);
                 handleOnClose();
                 navigate("/");
             }
@@ -120,11 +120,8 @@ const Signup = ({ setIsConnected, show, setShow, setShowLogin }) => {
                                 />
                                 <label htmlFor="newsletter"> S'inscrire à notre newsletter</label>
                             </div>
-                            
                             <span>En m'inscrivant je confirme avoir lu et accepté les Termes & Conditions et politique de Confidentialité de Vinted. Je confirme avoir au moins 18ans.</span>
-                        </div>
-                        
-                        
+                        </div>                       
                         <input type="submit" value="S'inscrire" />
                     </form>
                     <span className="already-signup" onClick={handleOnClikForLogin}>Tu as déjà un compte ? Connecte-toi !</span>

@@ -29,9 +29,20 @@ button {
 }
 
 header {
-  height: 70px;
+  height: 80px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-class {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -41,20 +52,146 @@ header img {
   margin-right: 60px;
 }
 
-header > * {
+/* header > * {
   flex: 1;
-}
+} */
 
 header > *:not(:first-child) {
   margin-right: 20px;
 }
 
-header > input {
-  flex: 5;
+.search-container > input {
+  /* flex: 1; */
   border-radius: 5px;
   height: 30px;
   border: none;
   background-color: #f5f6f7;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--appGreenColor);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--appGreenColor);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--appGreenColor);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/*PriceMin PriceMax*/
+.range-wrap {
+  width: 500px;
+  position: relative;
+}
+.range-value {
+  position: absolute;
+  top: -50%;
+}
+.range-value span {
+  width: 30px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  background: var(--appGreenColor);
+  color: #fff;
+  font-size: 12px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 6px;
+}
+.range-value span:before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 10px solid var(--appGreenColor);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -1px;
+}
+
+.price-min span:before {
+  border: 1px solid #666;
+}
+
+.price-max,
+.price-min {
+  position: absolute;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  width: 50%;
+  margin-left: 30px;
+}
+
+/* .price-min {
+  z-index: 0;
+}
+
+.price-max {
+  z-index: 1;
+} */
+
+.filter-container {
+  margin-top: 25px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
 }
 
 header .btn-vente {
@@ -238,6 +375,12 @@ header .btn-vente {
     top: 0px;
     opacity: 1;
   }
+}
+
+/* PUBLISH */
+.publish-form {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Foncer l'arrière-plan de la fenêtre modale */

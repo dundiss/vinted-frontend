@@ -4,7 +4,7 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setIsConnected, show, setShow}) => {
+const Login = ({setUserToken, show, setShow}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -31,14 +31,15 @@ const Login = ({ setIsConnected, show, setShow}) => {
         try {
             // const response = await axios.post("https://lereacteur-vinted-api.herokuapp.com/user/login",
             const response = await axios.post("https://vinted-pegasus21-dt.herokuapp.com/user/login",
+            //const response = await axios.post("http://localhost:3000/user/login",
                 {
                     email: email,
                     password: password
                 });
             //console.log(response.data);
             if (response.data && response.data.token && response.data.token !== "") {
-                Cookies.set("token", response.data.token);
-                setIsConnected(true);
+                Cookies.set("userToken", response.data.token);
+                setUserToken(response.data.token);
                 handleOnClose();
                 navigate("/");
             }

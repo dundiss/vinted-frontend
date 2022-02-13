@@ -10,8 +10,10 @@ const Offer = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`https://lereacteur-vinted-api.herokuapp.com/offer/${id}`);
-                //console.log(response.data);
+                const response = await axios.get(`https://vinted-pegasus21-dt.herokuapp.com/offer/${id}`);
+                //const response = await axios.get(`https://lereacteur-vinted-api.herokuapp.com/offer/${id}`);
+                //const response = await axios.get("https://lereacteur-vinted.netlify.app/offer/62014e7cc00de47d92e8bf05");
+                console.log(response.data);
                 setData(response.data);
                 setDetails({});
                 const tmpDetails = {};

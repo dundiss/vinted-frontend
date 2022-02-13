@@ -7,7 +7,7 @@ function Home({ offers, banner }) {
 
     function handleClick(event, id) {
         event.preventDefault();
-        navigate(`/offer/${id}`, { replace: true });
+        navigate(`/offer/${id}`);
     }
 
     return (
@@ -30,7 +30,7 @@ function Home({ offers, banner }) {
                                     {offer.owner.account.avatar && <img src={offer.owner.account.avatar.secure_url} alt={`im-${index}`} />}
                                     <span >{offer.owner.account.username}</span>
                                 </div>
-                                <img src={offer.product_image.secure_url} alt={`im-product${index}`} onClick={((e) => { handleClick(e, offer._id) })}/>
+                                <img src={offer.product_image && offer.product_image.secure_url} alt={`im-product${index}`} onClick={((e) => { handleClick(e, offer._id) })}/>
                                 <span>{offer.product_price} €</span>
                                 {details.TAILLE && <span>{details.TAILLE}</span>}
                                 {details.MARQUE && <span>{details.MARQUE}</span>}
