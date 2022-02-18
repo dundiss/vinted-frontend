@@ -198,16 +198,19 @@ header .btn-vente {
   color: white;
   background-color: var(--appGreenColor);
   margin-left: 40px;
+  box-sizing: border-box;
 }
 
 .toDisconnect {
   border-color: #c2175b;
   background-color: #c2175b;
   color: white;
+  box-sizing: border-box;
 }
 
 .toConnect {
   background-color: white;
+  box-sizing: border-box;
 }
 
 /*Page Home*/
@@ -539,6 +542,93 @@ header .btn-vente {
   background-color: var(--appGreenColor);
 }
 
+/*PUBLISH*/
+.product {
+  display: flex;
+  flex-direction: column;
+}
+.product-desc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border: 1px solid #999999;
+}
+
+.publish-form .product-desc:first-child {
+  height: 200px;
+}
+
+.product-desc > img:first-child {
+  height: 90%;
+  object-fit: cover;
+}
+.product-desc input[type='file'] {
+  position: absolute;
+  margin-top: 3px;
+  margin-left: 3px;
+  height: 1px;
+  width: 1px;
+  z-index: -5;
+}
+
+.product-desc > label {
+  width: 50%;
+  padding-left: 10px;
+}
+.publish-form .product-desc:first-child > label {
+  width: 200px;
+  height: 50px;
+  border: 1px solid var(--appGreenColor);
+  color: var(--appGreenColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product-desc > input,
+.exchange {
+  width: 50%;
+  height: 50%;
+  border: none;
+  border-bottom: 1px solid #999999;
+  padding-right: 10px;
+}
+
+.product-desc > input:focus {
+  border: none;
+  border-bottom: 1px solid var(--appGreenColor);
+}
+
+.exhange {
+  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 50%;
+  padding-right: 10px;
+}
+
+.exchange > input:first-child {
+  border: none;
+  border-bottom: 1px solid #999999;
+  padding-right: 10px;
+  width: 100%;
+  height: 60%;
+}
+
+.publish-form .product-desc:last-child {
+  border: none;
+  background-color: violet;
+}
+
+/*form submit button*/
+form > input {
+  background-color: var(--appGreenColor);
+  width: 100px;
+  height: 30px;
+}
+
 @media (max-width: 768px) {
   :root {
     --appSideMargin: 5px;
@@ -551,13 +641,24 @@ header .btn-vente {
 
   .container {
     width: 100vw;
+    margin: 0px;
   }
 
   header {
     padding: 0px;
+    flex-direction: column;
   }
 
-  header > *:not(:first-child) {
+  header {
+    padding: 0px;
+    height: 180px;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  /* header > *:not(:first-child) {
     margin-right: 5px;
   }
 
@@ -568,12 +669,36 @@ header .btn-vente {
 
   header > input {
     flex: 1;
+    width: 50px;
+  } */
+
+  header img {
+    margin-top: 5px;
+    width: 60px;
+    margin-left: 0px;
+    margin-right: 5px;
+  }
+
+  header button {
+    margin-left: 5px;
     width: 100px;
   }
 
-  header img {
-    width: 60px;
+  header button {
     margin-right: 5px;
+    margin-left: 0px;
+  }
+  .slider.round {
+    border-radius: 25px;
+  }
+
+  .switch {
+    height: 32px;
+  }
+
+  /*PriceMin PriceMax*/
+  .range-wrap {
+    width: 200px;
   }
 
   /*Page Home*/
@@ -582,11 +707,17 @@ header .btn-vente {
   }
 
   .hero div {
-    top: 140px;
+    top: 200px;
     width: 45%;
     height: 150px;
     padding: 0 10px;
     text-align: center;
+  }
+
+  .offer > img {
+    width: 140px;
+    height: 225px;
+    object-fit: cover;
   }
 
   .container-offer {

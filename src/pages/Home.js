@@ -3,7 +3,7 @@ import Hero from '../components/Hero';
 import { useNavigate } from "react-router-dom";
 
 function Home({ offers, banner }) {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     function handleClick(event, id) {
         event.preventDefault();

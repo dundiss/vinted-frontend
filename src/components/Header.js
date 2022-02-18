@@ -1,7 +1,7 @@
 import React from 'react'
 import Signup from '../pages/Signup';
 import Login from '../pages/Login';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -10,6 +10,7 @@ function Header({ logo, setData, userToken, setUserToken }) {
     const navigate = useNavigate();
     const [showLogin, setShowLogin] = useState(false);
     const [showSignup, setShowSignup] = useState(false);
+    const [searchText, setsearchText] = useState("");
     const [isAscSort, setIsAscSort] = useState(true);
     const [priceMin, setPriceMin] = useState(10);
     const [priceMax, setPriceMax] = useState(10);
@@ -56,20 +57,30 @@ function Header({ logo, setData, userToken, setUserToken }) {
     }
 
     const handleSearch = async (event) => {
-        try {
-            let filter = "";
-            const sortType = isAscSort ? "?sort=price-asc" : "?sort=price-desc";
-            filter += sortType;
-            const searchtext = event.target.value;
-            if (searchtext) {
-                filter += `&title=${searchtext}`
-            }
-            const response = await axios.get(`https://vinted-pegasus21-dt.herokuapp.com/offers${filter}`);
-            setData(response.data);
-        } catch (error) {
-            console.log(error.message);
-        }
+        setsearchText(event.target.value);
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                let filter = "";
+                const sortType = isAscSort ? "?sort=price-asc" : "?sort=price-desc";
+                filter += sortType;
+                if (searchText) {
+                    filter += `&title=${searchText}`
+                }
+                if (priceMax>10) {
+                    filter += `&priceMin=${priceMin}`;
+                    filter += `&priceMax=${priceMax}`
+                }
+                const response = await axios.get(`https://vinted-pegasus21-dt.herokuapp.com/offers${filter}`);
+                setData(response.data);
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
+        fetchData();
+    }, [searchText, isAscSort, priceMin, priceMax, setData]);
 
     return (
         <header className="container">
@@ -87,7 +98,7 @@ function Header({ logo, setData, userToken, setUserToken }) {
                     </div>
                     <div className="range-wrap">
                         {/* <output htmlFor="price" onforminput="value = price.valueAsNumber;"></output> */}
-                        <output htmlFor="price" value={priceMax}></output>
+                        <output htmlFor="price" value={priceMax}>Trier par prix :</output>
                         <input className="price-min" z-index={priceMax > priceMin ? "1" : "0"} type="range" name="price-min" min="10" max={priceMax} value={priceMin} step="1" onChange={handleOnPriceMinChange}></input>
                         <input className="price-max" type="range" name="price-max" min={priceMin} max="500" value={priceMax} step="1" onChange={handleOnPriceMaxChange}></input>
                         {/* <input id="price-inp" type="range" name="price" min="1" max="250" value="3" step="5" /> */}
@@ -106,12 +117,12 @@ function Header({ logo, setData, userToken, setUserToken }) {
                 )
                 :
                 (
-                <>
+                <div>
                     <button onClick={handleOnClickLogin} className="toConnect">Se connecter</button>
                     <Login userToken={userToken} setUserToken={setUserToken} show={showLogin} setShow={setShowLogin}></Login>
                     <Signup userToken={userToken} setUserToken={setUserToken} show={showSignup} setShow={setShowSignup} setShowLogin={setShowLogin}></Signup>
                     <button onClick={() => { navigate("/publish") }} className="btn-vente">Vends tes articles</button>
-                </>
+                </div>
                 )
             }
         </header>
