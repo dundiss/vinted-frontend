@@ -16,10 +16,10 @@ import banner from "./assets/images/banner-wide.jpg"
 function App() {
   const [data, setData] = useState();
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
+  const [showSignup, setShowSignup] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [nextPage, setNextPage] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [orderPrice, setOrderPrice] = useState(0);
-  const [productTitle, setProductTitle] = useState("");
-  const [productId, setProductId] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +43,18 @@ function App() {
     <div>
         
         <Router>
-          <Header logo={logo} setData={setData} userToken={userToken} setUserToken={setUserToken}></Header>
+          <Header
+            logo={logo}
+            setData={setData}
+            userToken={userToken}
+            setUserToken={setUserToken}
+            showLogin={showLogin}
+            setShowLogin={setShowLogin}
+            showSignup={showSignup}
+            setShowSignup={setShowSignup}
+            nextPage={nextPage}
+            setNextPage={setNextPage}>
+          </Header>
           <nav>
             <ul>
               {/* <li>
@@ -57,8 +68,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home offers={data.offers} banner={banner} />} />
             <Route path="/publish" element={<Publish />} />
-            <Route path="/offer/:id" element={<Offer userToken={userToken} setOrderPrice={setOrderPrice} setProductTitle={setProductTitle} setProductId={setProductId}/>} />
-            <Route path="/payment" element={<Payment orderPrice={orderPrice} title={productTitle} productId={productId}/>} />
+            <Route path="/offer/:id" element={<Offer setShowLogin={setShowLogin} setNextPage={setNextPage}/>} />
+            <Route path="/payment" element={<Payment />} />
           </Routes>
         </Router>
     </div>

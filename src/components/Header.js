@@ -6,10 +6,8 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Header({ logo, setData, userToken, setUserToken }) {
+function Header({ logo, setData, userToken, setUserToken, showLogin, setShowLogin, showSignup, setShowSignup, nextPage, setNextPage }) {
     const navigate = useNavigate();
-    const [showLogin, setShowLogin] = useState(false);
-    const [showSignup, setShowSignup] = useState(false);
     const [searchText, setsearchText] = useState("");
     const [isAscSort, setIsAscSort] = useState(true);
     const [priceMin, setPriceMin] = useState(10);
@@ -27,6 +25,7 @@ function Header({ logo, setData, userToken, setUserToken }) {
             setUserToken(null);
             setShowLogin(false);
             Cookies.remove("userToken");
+            Cookies.remove("userId");
             navigate("/");
         }
     }
@@ -82,7 +81,7 @@ function Header({ logo, setData, userToken, setUserToken }) {
             }
         };
         fetchData();
-    }, [searchText, isAscSort, priceMin, priceMax, setData]);
+    }, [searchText, isAscSort, priceMin, priceMax, userToken, setData]);
 
     return (
         <header className="container">
@@ -121,8 +120,24 @@ function Header({ logo, setData, userToken, setUserToken }) {
                 (
                 <div>
                     <button onClick={handleOnClickLogin} className="toConnect">Se connecter</button>
-                    <Login userToken={userToken} setUserToken={setUserToken} show={showLogin} setShow={setShowLogin}></Login>
-                    <Signup userToken={userToken} setUserToken={setUserToken} show={showSignup} setShow={setShowSignup} setShowLogin={setShowLogin}></Signup>
+                    <Login
+                        userToken={userToken}
+                        setUserToken={setUserToken}
+                        show={showLogin}
+                        setShow={setShowLogin}
+                        setShowSignup={setShowSignup}
+                        nextPage={nextPage}
+                        setNextPage={setNextPage}>                            
+                    </Login>
+                    <Signup
+                        userToken={userToken}
+                        setUserToken={setUserToken}
+                        show={showSignup}
+                        setShow={setShowSignup}
+                        setShowLogin={setShowLogin}
+                        nextPage={nextPage}
+                        setNextPage={setNextPage}>
+                    </Signup>
                     <button onClick={() => { navigate("/publish") }} className="btn-vente">Vends tes articles</button>
                 </div>
                 )

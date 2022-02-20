@@ -531,7 +531,8 @@ header .btn-vente {
   margin-top: 10px;
 }
 
-.modal-content .already-signup {
+.modal-content .already-signup,
+.modal-content .signup {
   text-decoration: none;
   color: var(--appGreenColor);
   text-align: center;

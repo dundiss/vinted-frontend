@@ -4,7 +4,7 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const Signup = ({ setUserToken, show, setShow, setShowLogin }) => {
+const Signup = ({ setUserToken, show, setShow, setShowLogin, nextPage, setNextPage }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -40,6 +40,7 @@ const Signup = ({ setUserToken, show, setShow, setShowLogin }) => {
 
     const handleOnClikForLogin = event => {
         handleOnClose();
+        window.scrollTo(0, 0);
         setShowLogin(true);
     };
 
@@ -62,6 +63,29 @@ const Signup = ({ setUserToken, show, setShow, setShowLogin }) => {
                 setUserToken(response.data.token);
                 handleOnClose();
                 navigate("/");
+            }
+
+            if (response.data && response.data.token && response.data.token !== "") {
+                Cookies.set("userToken", response.data.token);
+                Cookies.set("userId", response.data._id);
+                //console.log("response.data._id ", response.data._id);
+                //console.log("Cookies.get-user ", Cookies.get("userId"));
+                setUserToken(response.data.token);
+                handleOnClose();
+
+                if (nextPage.state) {
+                    if (nextPage.state.next) {
+                        const next = nextPage;
+                        //Clear state
+                        setNextPage({});
+                        console.log("next ", next);
+                        navigate(next.state.next, { state: next.state });
+                    }
+                }
+                else {
+                    navigate("/");
+                }
+
             }
             //console.log(response.data);
 

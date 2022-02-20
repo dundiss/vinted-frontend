@@ -31,20 +31,7 @@ const Publish = ({ userToken }) => {
 
         
         try {
-            console.log(userToken);
-            const data = {
-                title: title,
-                description: description,
-                price: price,
-                condition: state,
-                city: city,
-                brand: brand,
-                size: size,
-                color: color,
-                picture: selectedFile
-            };
-
-            //console.log(data);
+            //console.log(userToken);
 
             const response = await axios.post(
                 "https://vinted-pegasus21-dt.herokuapp.com/offer/publish",
@@ -65,8 +52,6 @@ const Publish = ({ userToken }) => {
 
     const handleFileSelect = (event) => {
         console.log(event.target.files);
-        let selectedFile = event.target.files[0];
-        //console.log("selectedFile : ", selectedFile);
         setSelectedFile(event.target.files[0]);
         document.uploaded_im.src = URL.createObjectURL(event.target.files[0]);
     }

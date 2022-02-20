@@ -1,10 +1,10 @@
 // import du package axios
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({setUserToken, show, setShow}) => {
+const Login = ({ setUserToken, show, setShow, setShowSignup, nextPage, setNextPage}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -25,6 +25,11 @@ const Login = ({setUserToken, show, setShow}) => {
         setPassword(value);
     };
 
+    const handleSignup = () => {
+        handleOnClose();
+        setShowSignup(true);
+    }
+
     const handleSubmit = async event => {
         event.preventDefault(); // Pour empêcher le navigateur de changer de page lors de la soumission du formulaire
         //console.log(email, password);
@@ -39,9 +44,25 @@ const Login = ({setUserToken, show, setShow}) => {
             //console.log(response.data);
             if (response.data && response.data.token && response.data.token !== "") {
                 Cookies.set("userToken", response.data.token);
+                Cookies.set("userId", response.data._id);
+                console.log("response.data._id ", response.data._id);
+                console.log("Cookies.get-user ", Cookies.get("userId"));
                 setUserToken(response.data.token);
                 handleOnClose();
-                navigate("/");
+
+                if (nextPage.state) {
+                    if (nextPage.state.next) {
+                        const next = nextPage;
+                        //Clear state
+                        setNextPage({});
+                        console.log("next ", next);
+                        navigate(next.state.next, { state: next.state });
+                    }
+                }
+                else {
+                    navigate("/");
+                }
+                
             }
 
         } catch (error) {
@@ -76,6 +97,7 @@ const Login = ({setUserToken, show, setShow}) => {
 
                         <input type="submit" value="Se connecter" />
                     </form>
+                    <span onClick={handleSignup} className="signup">Pas encore de compte ? Inscris-toi !</span>
                 </div>
             </div>
         </div>

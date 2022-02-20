@@ -2,12 +2,24 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
-const Offer = ({ setOrderPrice, setProductId, setProductTitle}) => {
+const Offer = ({ setShowLogin, setNextPage}) => {
     const [data, setData] = useState();
     const [details, setDetails] = useState();
     const { id } = useParams();
     const navigate = useNavigate();
+
+    const handleOrderClick = () => {
+        if (Cookies.get("userToken")){
+            navigate("/payment", { state: { orderPrice: data.product_price, productId: data._id, title: data.product_name } });
+        }
+        else {
+            setNextPage({ state: { next: "/payment", orderPrice: data.product_price, productId: data._id, title: data.product_name } });
+            window.scrollTo(0, 0);
+            setShowLogin(true);
+        }
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,23 +31,19 @@ const Offer = ({ setOrderPrice, setProductId, setProductTitle}) => {
                 setData(response.data);
                 setDetails({});
                 const tmpDetails = {};
-                if (response.data && response.data.product_details){
+                if (response.data && response.data.product_details) {
                     response.data.product_details.forEach(element => {
                         const key = Object.keys(element);
                         tmpDetails[key] = element[key]
                     });
                 }
                 setDetails(tmpDetails);
-                setOrderPrice(response.data.product_price);
-                setProductId(response.data._id);
-                setProductTitle(response.data.product_name);
             } catch (error) {
                 console.log(error.message);
             }
         };
         fetchData();
-    }, [id, setOrderPrice, setProductId, setProductTitle]);
-
+    }, [id]);
 
     return (
         <div className="container container-offer">
@@ -89,7 +97,7 @@ const Offer = ({ setOrderPrice, setProductId, setProductTitle}) => {
                     {data && data.owner.account.avatar && <img src={data.owner.account.avatar.secure_url} alt={`im-product`} />}
                     {data && <span>{data.owner.account.username}</span>}
                 </div>
-                <button onClick={() => navigate("/payment")}>Acheter</button>
+                <button onClick={handleOrderClick}>Acheter</button>
             </div>
             
         </div>
