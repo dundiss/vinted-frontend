@@ -67,7 +67,7 @@ function App() {
           </nav>
           <Routes>
             <Route path="/" element={<Home offers={data.offers} banner={banner} />} />
-            <Route path="/publish" element={<Publish />} />
+            <Route path="/publish" element={<Publish setShowLogin={setShowLogin}/>} />
             <Route path="/offer/:id" element={<Offer setShowLogin={setShowLogin} setNextPage={setNextPage}/>} />
             <Route path="/payment" element={<Payment />} />
           </Routes>

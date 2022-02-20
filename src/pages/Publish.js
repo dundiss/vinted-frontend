@@ -1,8 +1,9 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Publish = ({ userToken }) => {
+const Publish = ({ setShowLogin }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -29,25 +30,29 @@ const Publish = ({ userToken }) => {
         formData.append("color", color);
         formData.append("picture", selectedFile);
 
-        
-        try {
-            //console.log(userToken);
-
-            const response = await axios.post(
-                "https://vinted-pegasus21-dt.herokuapp.com/offer/publish",
-                formData,
-                {
-                    headers: {
-                        "Authorization": "Bearer " + userToken,
-                        "Content-Type": "multipart/form-data"
+        if (Cookies.get("userToken")){
+            try {
+                const response = await axios.post(
+                    "https://vinted-pegasus21-dt.herokuapp.com/offer/publish",
+                    formData,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + Cookies.get("userToken"),
+                            "Content-Type": "multipart/form-data"
+                        }
                     }
-                }
-            );
-            //console.log(response);
-            navigate(`offer/${response.data._id}`);
-        } catch (error) {
-            console.error(error)
+                );
+                console.log(response);
+                navigate(`offer/${response.data.data._id}`);
+            } catch (error) {
+                console.error(error)
+            }
         }
+        else {
+            setShowLogin(true);
+        }
+        
+        
     }
 
     const handleFileSelect = (event) => {
