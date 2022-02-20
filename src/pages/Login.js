@@ -89,7 +89,7 @@ const Login = ({ setUserToken, show, setShow, setShowSignup, nextPage, setNextPa
                         />
                         <input
                             required
-                            placeholder="Password"
+                            placeholder="Mot de passe"
                             type="password"
                             name="password"
                             onChange={handlePasswordChange}

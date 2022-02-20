@@ -121,7 +121,7 @@ const Signup = ({ setUserToken, show, setShow, setShowLogin, nextPage, setNextPa
                         />
                         <input
                             required
-                            placeholder="Phone"
+                            placeholder="Numéro de téléphone"
                             type="text"
                             name="Phone"
                             value={phone}
@@ -129,7 +129,7 @@ const Signup = ({ setUserToken, show, setShow, setShowLogin, nextPage, setNextPa
                         />
                         <input
                             required
-                            placeholder="Password"
+                            placeholder="Mot de passe"
                             type="password"
                             name="password"
                             onChange={handlePasswordChange}
