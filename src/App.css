@@ -13,6 +13,10 @@ h2 {
   line-height: 42.5px;
 }
 
+body {
+  background-color: #ebedee;
+}
+
 button {
   border-radius: 5px;
   border: 1px solid var(--appGreenColor);
@@ -33,6 +37,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }
 
 .search-container {
@@ -627,6 +632,51 @@ form > input {
   background-color: var(--appGreenColor);
   width: 100px;
   height: 30px;
+}
+
+/*PAYMENT*/
+.command {
+  margin-top: 35px;
+  background-color: white;
+  width: 600px;
+}
+.command-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.command-content .summary {
+  margin-bottom: 35px;
+  color: #a0a0a0;
+}
+
+.command-content .content {
+  display: flex;
+  justify-content: space-between;
+  color: #a0a0a0;
+}
+
+.command-content .total {
+  margin: 40px 0;
+  font-weight: bold;
+  color: black;
+}
+
+.command-content > button {
+  margin-top: 20px;
+  width: 100%;
+  color: white;
+  background-color: #00c06d;
+  border: 1px solid #00c06d;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkoutForm {
+  margin: 20px 0px;
 }
 
 @media (max-width: 768px) {

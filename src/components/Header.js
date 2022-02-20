@@ -73,7 +73,9 @@ function Header({ logo, setData, userToken, setUserToken }) {
                     filter += `&priceMin=${priceMin}`;
                     filter += `&priceMax=${priceMax}`
                 }
+                //const response = await axios.get(`http://localhost:3000/offers${filter}`);
                 const response = await axios.get(`https://vinted-pegasus21-dt.herokuapp.com/offers${filter}`);
+                
                 setData(response.data);
             } catch (error) {
                 console.log(error.message);

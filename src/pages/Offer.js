@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Offer = () => {
+const Offer = ({ setOrderPrice, setProductId, setProductTitle}) => {
     const [data, setData] = useState();
     const [details, setDetails] = useState();
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,12 +26,15 @@ const Offer = () => {
                     });
                 }
                 setDetails(tmpDetails);
+                setOrderPrice(response.data.product_price);
+                setProductId(response.data._id);
+                setProductTitle(response.data.product_name);
             } catch (error) {
                 console.log(error.message);
             }
         };
         fetchData();
-    }, [id]);
+    }, [id, setOrderPrice, setProductId, setProductTitle]);
 
 
     return (
@@ -82,9 +87,9 @@ const Offer = () => {
                 {data && data.product_description && <span>{data.product_description}</span>}
                 <div className="offer-owner">
                     {data && data.owner.account.avatar && <img src={data.owner.account.avatar.secure_url} alt={`im-product`} />}
-                    {data && <span >{data.owner.account.username}</span>}
+                    {data && <span>{data.owner.account.username}</span>}
                 </div>
-                <button>Acheter</button>
+                <button onClick={() => navigate("/payment")}>Acheter</button>
             </div>
             
         </div>

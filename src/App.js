@@ -7,20 +7,24 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import Home from "./pages/Home";
 import Offer from "./pages/Offer";
-import logo from "./assets/images/logo-vinted.png";
-import banner from "./assets/images/banner-wide.jpg"
 import Header from "./components/Header";
 import Publish from "./pages/Publish";
+import Payment from "./pages/Payment";
+import logo from "./assets/images/logo-vinted.png";
+import banner from "./assets/images/banner-wide.jpg"
 
 function App() {
   const [data, setData] = useState();
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
   const [isLoading, setIsLoading] = useState(true);
- 
+  const [orderPrice, setOrderPrice] = useState(0);
+  const [productTitle, setProductTitle] = useState("");
+  const [productId, setProductId] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //const response = await axios.get("http://localhost:3000/offers", { crossdomain: true });
+        //const response = await axios.get("http://localhost:/offers");
         const response = await axios.get("https://vinted-pegasus21-dt.herokuapp.com/offers");
         //const response = await axios.get("https://lereacteur-vinted-api.herokuapp.com/offers");
         //console.log(response.data);
@@ -53,7 +57,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home offers={data.offers} banner={banner} />} />
             <Route path="/publish" element={<Publish />} />
-            <Route path="/offer/:id" element={<Offer userToken={userToken}/>} />
+            <Route path="/offer/:id" element={<Offer userToken={userToken} setOrderPrice={setOrderPrice} setProductTitle={setProductTitle} setProductId={setProductId}/>} />
+            <Route path="/payment" element={<Payment orderPrice={orderPrice} title={productTitle} productId={productId}/>} />
           </Routes>
         </Router>
     </div>
