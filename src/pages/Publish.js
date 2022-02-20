@@ -43,7 +43,7 @@ const Publish = ({ setShowLogin }) => {
                     }
                 );
                 console.log(response);
-                navigate(`offer/${response.data.data._id}`);
+                navigate(`/offer/${response.data._id}`);
             } catch (error) {
                 console.error(error)
             }
@@ -147,7 +147,6 @@ const Publish = ({ setShowLogin }) => {
                 <div className="product-desc">
                     <label htmlFor="brand">Marque</label>
                     <input
-                        required
                         id="brand"
                         placeholder="ex: Zara"
                         type="text"
@@ -161,7 +160,6 @@ const Publish = ({ setShowLogin }) => {
                 <div className="product-desc">
                     <label htmlFor="size">Taille</label>
                     <input
-                        required
                         id="size"
                         placeholder="ex: L / 40 / 12"
                         type="text"
@@ -174,7 +172,6 @@ const Publish = ({ setShowLogin }) => {
                 <div className="product-desc">
                     <label htmlFor="color">Couleur</label>
                     <input
-                        required
                         id="color"
                         placeholder="ex: Fushia"
                         type="text"

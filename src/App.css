@@ -268,6 +268,8 @@ header .btn-vente {
 
 .offer-header {
   display: flex;
+  /* justify-content: center; */
+  align-items: center;
   margin-bottom: 5px;
 }
 .offer-header span {
@@ -356,12 +358,24 @@ header .btn-vente {
   margin: 10px 0px;
 }
 
-.offer-owner img {
+.offer-owner img,
+.initial {
   width: 40px;
   height: 40px;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 10px;
+}
+
+.offer-owner img {
+  object-fit: cover;
+}
+
+.initial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--appGreenColor);
 }
 
 .container-offer button {

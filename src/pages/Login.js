@@ -1,6 +1,6 @@
 // import du package axios
 import axios from "axios";
-import { useState, useEffect} from "react";
+import { useState } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 

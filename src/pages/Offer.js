@@ -7,6 +7,8 @@ import Cookies from "js-cookie";
 const Offer = ({ setShowLogin, setNextPage}) => {
     const [data, setData] = useState();
     const [details, setDetails] = useState();
+    const [avatar, setAvatar] = useState("");
+    const [username, setUserName] = useState(" ");
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -38,6 +40,14 @@ const Offer = ({ setShowLogin, setNextPage}) => {
                     });
                 }
                 setDetails(tmpDetails);
+                setUserName(response.data.owner.account.username);
+                if (response.data && response.data.owner.account.avatar && response.data.owner.account.avatar.secure_url) {
+                    setAvatar(response.data.owner.account.avatar.secure_url);
+                }
+                else {
+                    setAvatar("");
+                }
+                
             } catch (error) {
                 console.log(error.message);
             }
@@ -94,7 +104,7 @@ const Offer = ({ setShowLogin, setNextPage}) => {
                 {data && data.product_name && <h3>{data.product_name}</h3>}
                 {data && data.product_description && <span>{data.product_description}</span>}
                 <div className="offer-owner">
-                    {data && data.owner.account.avatar && <img src={data.owner.account.avatar.secure_url} alt={`im-product`} />}
+                    {(avatar === "") ? <span className="initial">{username[0]}</span> : <img src={avatar} alt={`im-product`} />}
                     {data && <span>{data.owner.account.username}</span>}
                 </div>
                 <button onClick={handleOrderClick}>Acheter</button>

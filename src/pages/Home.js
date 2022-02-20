@@ -23,11 +23,19 @@ function Home({ offers, banner }) {
                             details[key] = element[key]
                         });
 
+                        const avatar = "";
+                        if (offer.owner.account.avatar && offer.owner.account.avatar.secure_url) {
+                            avatar = offer.owner.account.avatar.secure_url;
+                        }
+
                         //console.log(offer.product_details);
                         return (
                             <div key={index} className="offer">
                                 <div className="offer-header">
-                                    {offer.owner.account.avatar && <img src={offer.owner.account.avatar.secure_url} alt={`im-${index}`} />}
+                                    {avatar ?
+                                    <img src={avatar} alt={`im-${index}`} />
+                                    :
+                                    <span className="initial">{offer.owner.account.username[0]}</span>}
                                     <span >{offer.owner.account.username}</span>
                                 </div>
                                 <img src={offer.product_image && offer.product_image.secure_url} alt={`im-product${index}`} onClick={((e) => { handleClick(e, offer._id) })}/>
