@@ -268,11 +268,10 @@ header .btn-vente {
 
 .offer-header {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   margin-bottom: 5px;
 }
-.offer-header span {
+.offer-header span:last-child {
   margin-left: 10px;
 }
 
@@ -376,6 +375,9 @@ header .btn-vente {
   justify-content: center;
   align-items: center;
   background-color: var(--appGreenColor);
+  box-sizing: border-box;
+  margin-left: 0px;
+  padding: Opx;
 }
 
 .container-offer button {
