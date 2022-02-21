@@ -23,7 +23,7 @@ function Home({ offers, banner }) {
                             details[key] = element[key]
                         });
 
-                        const avatar = "";
+                        let avatar = "";
                         if (offer.owner.account.avatar && offer.owner.account.avatar.secure_url) {
                             avatar = offer.owner.account.avatar.secure_url;
                         }

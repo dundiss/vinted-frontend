@@ -452,7 +452,7 @@ header .btn-vente {
   margin: auto;
   background-color: #f3f3f3;
   position: relative;
-  padding: 0;
+  padding: 0 10px;
   outline: 0;
   border: 1px #777 solid;
   text-align: justify;

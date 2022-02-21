@@ -58,13 +58,6 @@ const Signup = ({ setUserToken, show, setShow, setShowLogin, nextPage, setNextPa
                     password: password
                 });
             
-            if (response.data && response.data.token && (response.data.token !== "")) {
-                Cookies.set("userToken", response.data.token);
-                setUserToken(response.data.token);
-                handleOnClose();
-                navigate("/");
-            }
-
             if (response.data && response.data.token && response.data.token !== "") {
                 Cookies.set("userToken", response.data.token);
                 Cookies.set("userId", response.data._id);
@@ -83,6 +76,7 @@ const Signup = ({ setUserToken, show, setShow, setShowLogin, nextPage, setNextPa
                     }
                 }
                 else {
+                    handleOnClose();
                     navigate("/");
                 }
 
